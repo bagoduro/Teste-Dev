@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
     const user = await User.findById(payload.sub).select('-passwordHash');
     if (!user) return res.status(404).json({ error: 'User not found' });
 
-    return res.status(200).json({ user: { id: user._id, email: user.email } });
+    return res.status(200).json({ user: { id: user._id, email: user.email, name: user.name } });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Internal Server Error' });

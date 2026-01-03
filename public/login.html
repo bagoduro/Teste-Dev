@@ -29,18 +29,9 @@
         });
         const data = await r.json();
         if (!r.ok) throw data;
-        // Login agora seta um cookie HttpOnly; o frontend não precisa salvar o token
-        document.getElementById('message').innerText = 'Login com sucesso!';
-        // opcional: buscar dados do usuário
-        try {
-          const me = await fetch('/api/me');
-          const meData = await me.json();
-          if (me.ok && meData.user) {
-            document.getElementById('message').innerText += ' Usuário: ' + meData.user.email;
-          }
-        } catch (e) {
-          // ignore
-        }
+        // Login agora seta um cookie HttpOnly; redirecionar para a página de boas-vindas
+        document.getElementById('message').innerText = 'Login com sucesso! Redirecionando...';
+        setTimeout(() => { window.location.href = '/public/welcome.html'; }, 600);
       } catch (err) {
         document.getElementById('message').innerText = err.error || 'Erro no login';
       }

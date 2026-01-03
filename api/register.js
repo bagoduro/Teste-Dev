@@ -9,9 +9,9 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { email, password } = req.body || {};
-    if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password are required' });
+    const { name, email, password } = req.body || {};
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: 'Name, email and password are required' });
     }
 
     await connect();
@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(password, salt);
 
-    const user = new User({ email, passwordHash });
+    const user = new User({ name, email, passwordHash });
     await user.save();
 
     return res.status(201).json({ message: 'User created' });

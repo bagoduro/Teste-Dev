@@ -33,9 +33,9 @@ Projeto simples de cadastro e login usando Vercel Serverless Functions e MongoDB
 
 ## Endpoints
 
-- `POST /api/register` — body: `{ "email": "...", "password": "..." }` — cria usuário
+- `POST /api/register` — body: `{ "name": "...", "email": "...", "password": "..." }` — cria usuário (o campo `name` agora é obrigatório)
 - `POST /api/login` — body: `{ "email": "...", "password": "..." }` — seta cookie HttpOnly com o token e retorna `{ message }`
-- `GET /api/me` — retorna `{ user }` se autenticado via cookie
+- `GET /api/me` — retorna `{ user }` (inclui `name`) se autenticado via cookie
 - `POST /api/logout` — limpa o cookie e encerra a sessão
 
 ## Testando localmente ✅

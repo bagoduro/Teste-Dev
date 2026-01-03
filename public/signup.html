@@ -9,6 +9,7 @@
 <body>
   <h1>Cadastro</h1>
   <form id="signup">
+    <input type="text" id="name" placeholder="Nome" required />
     <input type="email" id="email" placeholder="Email" required />
     <input type="password" id="password" placeholder="Senha" required />
     <button type="submit">Cadastrar</button>
@@ -19,17 +20,19 @@
   <script>
     document.getElementById('signup').addEventListener('submit', async (e) => {
       e.preventDefault();
+      const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       try {
         const r = await fetch('/api/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
+          body: JSON.stringify({ name, email, password })
         });
         const data = await r.json();
         if (!r.ok) throw data;
-        document.getElementById('message').innerText = 'Conta criada com sucesso! Faça login.';
+        document.getElementById('message').innerText = 'Conta criada com sucesso! Redirecionando para login...';
+        setTimeout(() => { window.location.href = '/public/login.html'; }, 1200);
       } catch (err) {
         document.getElementById('message').innerText = err.error || 'Erro ao criar conta';
       }

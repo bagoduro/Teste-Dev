@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bem-vindo</title>
+  <style>body{font-family:Arial,Helvetica,sans-serif;max-width:480px;margin:40px auto;padding:0 16px}</style>
+</head>
+<body>
+  <h1 id="greet">Bem-vindo!</h1>
+  <p id="info"></p>
+  <button id="logout">Logout</button>
+
+  <script>
+    async function load() {
+      try {
+        const r = await fetch('/api/me');
+        const data = await r.json();
+        if (!r.ok) {
+          // not authenticated, redirect to login
+          window.location.href = '/public/login.html';
+          return;
+        }
+        document.getElementById('greet').innerText = 'Bem-vindo, ' + (data.user.name || data.user.email) + '!';
+        document.getElementById('info').innerText = 'Email: ' + data.user.email;
+      } catch (e) {
+        window.location.href = '/public/login.html';
+      }
+    }
+
+    document.getElementById('logout').addEventListener('click', async () => {
+      try {
+        const r = await fetch('/api/logout', { method: 'POST' });
+        if (r.ok) window.location.href = '/public/login.html';
+      } catch (e) {
+        console.error(e);
+      }
+    });
+
+    load();
+  </script>
+</body>
+</html>
