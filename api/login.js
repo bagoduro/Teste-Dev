@@ -5,8 +5,13 @@ const User = require('../models/User');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
-  // do not throw here because dev may run register first and set env later, but warn
   console.warn('JWT_SECRET is not defined. Set it in .env or Vercel settings.');
+}
+
+function setTokenCookie(res, token) {
+  const secure = process.env.NODE_ENV === 'production';
+  const cookie = `token=${token}; HttpOnly; Path=/; Max-Age=${60 * 60 * 24 * 7}; SameSite=Lax${secure ? '; Secure' : ''}`;
+  res.setHeader('Set-Cookie', cookie);
 }
 
 module.exports = async (req, res) => {
@@ -36,7 +41,10 @@ module.exports = async (req, res) => {
     const payload = { sub: user._id, email: user.email };
     const token = jwt.sign(payload, JWT_SECRET || 'default_dev_secret', { expiresIn: '7d' });
 
-    return res.status(200).json({ token });
+    // Set cookie instead of returning the token in the response body
+    setTokenCookie(res, token);
+
+    return res.status(200).json({ message: 'Login successful' });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Internal Server Error' });

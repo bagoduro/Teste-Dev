@@ -29,11 +29,33 @@
         });
         const data = await r.json();
         if (!r.ok) throw data;
-        localStorage.setItem('token', data.token);
-        document.getElementById('message').innerText = 'Login com sucesso! Token salvo no localStorage.';
+        // Login agora seta um cookie HttpOnly; o frontend não precisa salvar o token
+        document.getElementById('message').innerText = 'Login com sucesso!';
+        // opcional: buscar dados do usuário
+        try {
+          const me = await fetch('/api/me');
+          const meData = await me.json();
+          if (me.ok && meData.user) {
+            document.getElementById('message').innerText += ' Usuário: ' + meData.user.email;
+          }
+        } catch (e) {
+          // ignore
+        }
       } catch (err) {
         document.getElementById('message').innerText = err.error || 'Erro no login';
       }
+    });
+
+    // Logout button (optional)
+    const logoutBtn = document.createElement('button');
+    logoutBtn.textContent = 'Logout';
+    logoutBtn.addEventListener('click', async () => {
+      try {
+        const r = await fetch('/api/logout', { method: 'POST' });
+        if (r.ok) document.getElementById('message').innerText = 'Deslogado.';
+      } catch (e) { console.error(e); }
+    });
+    document.body.appendChild(logoutBtn);
     });
   </script>
 </body>
