@@ -4,49 +4,52 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Login</title>
-  <style>body{font-family:Arial,Helvetica,sans-serif;max-width:480px;margin:40px auto;padding:0 16px}input{display:block;margin:8px 0;padding:8px;width:100%}button{padding:8px 16px}</style>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; max-width: 480px; margin: 40px auto; padding: 0 16px }
+    input { display: block; margin: 8px 0; padding: 8px; width: 100% }
+    button { padding: 8px 16px }
+  </style>
 </head>
 <body>
   <h1>Login</h1>
+
   <form id="login">
     <input type="email" id="email" placeholder="Email" required />
     <input type="password" id="password" placeholder="Senha" required />
     <button type="submit">Entrar</button>
   </form>
+
   <p id="message"></p>
   <p><a href="/public/signup.html">Criar conta</a></p>
 
   <script>
     document.getElementById('login').addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
+
       try {
         const r = await fetch('/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password })
         });
+
         const data = await r.json();
         if (!r.ok) throw data;
-        // Login agora seta um cookie HttpOnly; redirecionar para a página de boas-vindas
-        document.getElementById('message').innerText = 'Login com sucesso! Redirecionando...';
-        setTimeout(() => { window.location.href = '/public/welcome.html'; }, 600);
-      } catch (err) {
-        document.getElementById('message').innerText = err.error || 'Erro no login';
-      }
-    });
 
-    // Logout button (optional)
-    const logoutBtn = document.createElement('button');
-    logoutBtn.textContent = 'Logout';
-    logoutBtn.addEventListener('click', async () => {
-      try {
-        const r = await fetch('/api/logout', { method: 'POST' });
-        if (r.ok) document.getElementById('message').innerText = 'Deslogado.';
-      } catch (e) { console.error(e); }
-    });
-    document.body.appendChild(logoutBtn);
+        document.getElementById('message').innerText =
+          'Login com sucesso! Redirecionando...';
+
+        setTimeout(() => {
+          window.location.href = '/public/welcome.html';
+        }, 600);
+
+      } catch (err) {
+        document.getElementById('message').innerText =
+          err.error || 'Erro no login';
+      }
     });
   </script>
 </body>
