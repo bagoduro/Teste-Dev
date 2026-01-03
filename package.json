@@ -1,0 +1,22 @@
+{
+  "name": "vercel-mongodb-auth",
+  "version": "1.0.0",
+  "description": "Projeto simples de cadastro e login com Vercel + MongoDB (Serverless Functions)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.0",
+    "node-fetch": "^3.3.1"
+  },
+  "devDependencies": {
+    "vercel": "^35.0.0"
+  }
+}
