@@ -4,14 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bem-vindo</title>
-  <style>
-    body { font-family: Arial, Helvetica, sans-serif; max-width: 480px; margin: 40px auto; padding: 0 16px }
-  </style>
+  <link rel="stylesheet" href="/public/styles.css">
 </head>
 <body>
-  <h1 id="greet">Bem-vindo!</h1>
-  <p id="info"></p>
-  <button id="logout">Logout</button>
+  <header class="header">
+    <div class="brand">Vercel + MongoDB Auth</div>
+    <nav>
+      <a href="/public/index.html">Home</a>
+      <a href="/public/login.html">Login</a>
+    </nav>
+  </header>
+
+  <main class="container welcome">
+    <section class="card">
+      <h1 id="greet">Bem-vindo!</h1>
+      <p id="info"></p>
+      <div class="logout"><button id="logout" class="btn">Logout</button></div>
+    </section>
+  </main>
 
   <script>
     async function load() {

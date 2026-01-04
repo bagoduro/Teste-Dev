@@ -4,18 +4,30 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sign Up</title>
-  <style>body{font-family:Arial,Helvetica,sans-serif;max-width:480px;margin:40px auto;padding:0 16px}input{display:block;margin:8px 0;padding:8px;width:100%}button{padding:8px 16px}</style>
+  <link rel="stylesheet" href="/public/styles.css">
 </head>
 <body>
-  <h1>Cadastro</h1>
-  <form id="signup">
-    <input type="text" id="name" placeholder="Nome" required />
-    <input type="email" id="email" placeholder="Email" required />
-    <input type="password" id="password" placeholder="Senha" required />
-    <button type="submit">Cadastrar</button>
-  </form>
-  <p id="message"></p>
-  <p><a href="/public/login.html">Já tenho conta (Login)</a></p>
+  <header class="header">
+    <div class="brand">Vercel + MongoDB Auth</div>
+    <nav>
+      <a href="/public/login.html">Login</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h1>Cadastro</h1>
+      <p class="lead">Crie sua conta inserindo nome, email e senha.</p>
+      <form id="signup">
+        <div class="form-group"><input type="text" id="name" placeholder="Nome" required /></div>
+        <div class="form-group"><input type="email" id="email" placeholder="Email" required /></div>
+        <div class="form-group"><input type="password" id="password" placeholder="Senha" required /></div>
+        <button class="btn" type="submit">Cadastrar</button>
+      </form>
+      <p id="message" class="message"></p>
+      <p><a href="/public/login.html">Já tenho conta (Login)</a></p>
+    </section>
+  </main>
 
   <script>
     document.getElementById('signup').addEventListener('submit', async (e) => {

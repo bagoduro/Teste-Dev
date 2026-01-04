@@ -4,12 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Auth Demo</title>
+  <link rel="stylesheet" href="/public/styles.css">
 </head>
-<body style="font-family:Arial,Helvetica,sans-serif;max-width:700px;margin:40px auto;padding:0 16px">
-  <h1>Vercel + MongoDB Auth</h1>
-  <ul>
-    <li><a href="/public/signup.html">Cadastro</a></li>
-    <li><a href="/public/login.html">Login</a></li>
-  </ul>
+<body>
+  <header class="header">
+    <div class="brand">Vercel + MongoDB Auth</div>
+    <nav>
+      <a href="/public/signup.html">Cadastro</a>
+      <a href="/public/login.html">Login</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h1>Demo de Autenticação</h1>
+      <p class="lead">Exemplo simples de cadastro e login usando Serverless Functions no Vercel e MongoDB.</p>
+      <p><a class="btn" href="/public/signup.html">Criar Conta</a> <a class="btn ghost" href="/public/login.html">Login</a></p>
+    </section>
+  </main>
+  <div class="footer">Projeto de exemplo • Faça deploy configurando variáveis de ambiente</div>
 </body>
 </html>
