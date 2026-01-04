@@ -1,69 +1,224 @@
 <!doctype html>
-<html>
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sign Up</title>
+  <title>Cadastro - Auth Demo</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link rel="stylesheet" href="/public/styles.css">
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+<body class="bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary shadow-sm">
     <div class="container">
-      <a class="navbar-brand text-primary fw-bold" href="/public/index.html">Vercel + MongoDB Auth</a>
-      <div class="collapse navbar-collapse">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="/public/index.html">
+        <i class="fas fa-shield-alt me-2"></i>
+        Vercel + MongoDB Auth
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="/public/login.html">Login</a></li>
+          <li class="nav-item">
+            <a class="nav-link btn-hover" href="/public/login.html">
+              <i class="fas fa-sign-in-alt me-1"></i> Login
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn-hover" href="/public/index.html">
+              <i class="fas fa-home me-1"></i> Home
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
   <main class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <section class="card">
-          <div class="card-body">
-            <h1 class="card-title">Cadastro</h1>
-            <p class="lead text-muted">Crie sua conta inserindo nome, email e senha.</p>
-            <form id="signup">
-              <div class="mb-3"><input class="form-control" type="text" id="name" placeholder="Nome" required /></div>
-              <div class="mb-3"><input class="form-control" type="email" id="email" placeholder="Email" required /></div>
-              <div class="mb-3"><input class="form-control" type="password" id="password" placeholder="Senha" required /></div>
-              <div class="d-flex align-items-center">
-                <button class="btn btn-primary" type="submit">Cadastrar</button>
-                <a class="btn btn-link ms-3" href="/public/login.html">Já tenho conta (Login)</a>
+    <div class="row justify-content-center align-items-center min-vh-80 py-5">
+      <div class="col-md-8 col-lg-6">
+        <div class="card modern-card animate__animated animate__fadeIn">
+          <div class="card-body p-4 p-md-5">
+            <div class="text-center mb-4">
+              <div class="icon-circle mb-3">
+                <i class="fas fa-user-plus fa-xl text-primary"></i>
+              </div>
+              <h1 class="h3 fw-bold">Criar Conta</h1>
+              <p class="text-muted">Preencha os dados abaixo para criar sua conta</p>
+            </div>
+            
+            <form id="signup" class="needs-validation" novalidate>
+              <div class="mb-3">
+                <label for="name" class="form-label fw-semibold">Nome Completo</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  <input type="text" class="form-control" id="name" placeholder="Seu nome" required>
+                  <div class="invalid-feedback">
+                    Por favor, insira seu nome.
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label for="email" class="form-label fw-semibold">Email</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                  <input type="email" class="form-control" id="email" placeholder="seu@email.com" required>
+                  <div class="invalid-feedback">
+                    Por favor, insira um email válido.
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mb-4">
+                <label for="password" class="form-label fw-semibold">Senha</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                  <input type="password" class="form-control" id="password" placeholder="Mínimo 6 caracteres" minlength="6" required>
+                  <div class="invalid-feedback">
+                    A senha deve ter pelo menos 6 caracteres.
+                  </div>
+                </div>
+                <div class="form-text mt-1">
+                  <i class="fas fa-info-circle me-1"></i>
+                  Use uma senha forte com letras, números e símbolos.
+                </div>
+              </div>
+              
+              <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-primary btn-lg btn-hover">
+                  <i class="fas fa-user-plus me-2"></i>Criar Conta
+                </button>
+              </div>
+              
+              <div class="text-center">
+                <p class="text-muted mb-2">Já possui uma conta?</p>
+                <a href="/public/login.html" class="btn btn-outline-primary btn-hover">
+                  <i class="fas fa-sign-in-alt me-2"></i>Fazer Login
+                </a>
               </div>
             </form>
-            <div id="message" class="message mt-3" role="status"></div>
+            
+            <div id="message" class="mt-4" role="alert"></div>
           </div>
-        </section>
+        </div>
+        
+        <div class="card mt-4 modern-card">
+          <div class="card-body p-4">
+            <h5 class="fw-bold mb-3"><i class="fas fa-shield-alt me-2 text-primary"></i>Segurança Garantida</h5>
+            <ul class="list-unstyled text-muted mb-0">
+              <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Senhas criptografadas com hash seguro</li>
+              <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Dados armazenados em MongoDB Atlas</li>
+              <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Autenticação com tokens JWT</li>
+              <li><i class="fas fa-check-circle text-success me-2"></i>Conexões seguras via HTTPS</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    document.getElementById('signup').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const msg = document.getElementById('message');
-      try {
-        const r = await fetch('/api/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, password })
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('signup');
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (!form.checkValidity()) {
+          form.classList.add('was-validated');
+          return;
+        }
+        
+        const name = nameInput.value;
+        const email = emailInput.value;
+        const password = passwordInput.value;
+        const msg = document.getElementById('message');
+        
+        // Mostrar estado de carregamento
+        msg.innerHTML = `
+          <div class="alert alert-info d-flex align-items-center">
+            <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+            <div>Criando sua conta...</div>
+          </div>
+        `;
+        
+        try {
+          const r = await fetch('/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password })
+          });
+          
+          const data = await r.json();
+          
+          if (!r.ok) {
+            throw new Error(data.error || 'Erro ao criar conta');
+          }
+          
+          // Sucesso
+          msg.innerHTML = `
+            <div class="alert alert-success d-flex align-items-center animate__animated animate__fadeIn">
+              <i class="fas fa-check-circle me-2"></i>
+              <div>
+                <strong>Conta criada com sucesso!</strong><br>
+                Redirecionando para login...
+              </div>
+            </div>
+          `;
+          
+          // Efeito de confirmação
+          document.querySelector('.modern-card').classList.add('animate__tada');
+          
+          setTimeout(() => {
+            window.location.href = '/public/login.html';
+          }, 1500);
+          
+        } catch (err) {
+          // Erro
+          msg.innerHTML = `
+            <div class="alert alert-danger d-flex align-items-center animate__animated animate__shakeX">
+              <i class="fas fa-exclamation-triangle me-2"></i>
+              <div>${err.message}</div>
+            </div>
+          `;
+          
+          // Efeito de erro
+          const inputs = [nameInput, emailInput, passwordInput];
+          inputs.forEach(input => input.classList.add('is-invalid'));
+          
+          setTimeout(() => {
+            inputs.forEach(input => input.classList.remove('is-invalid'));
+          }, 3000);
+        }
+      });
+      
+      // Validação em tempo real
+      const inputs = [nameInput, emailInput, passwordInput];
+      inputs.forEach(input => {
+        input.addEventListener('input', () => {
+          if (input.checkValidity()) {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+          }
         });
-        const data = await r.json();
-        if (!r.ok) throw data;
-        msg.innerHTML = '<div class="alert alert-success">Conta criada com sucesso! Redirecionando...</div>';
-        setTimeout(() => { window.location.href = '/public/login.html'; }, 1200);
-      } catch (err) {
-        msg.innerHTML = '<div class="alert alert-danger">' + (err.error || 'Erro ao criar conta') + '</div>';
+      });
+      
+      // Efeito de destaque para segurança
+      const securityCard = document.querySelector('.modern-card:nth-child(2)');
+      if (securityCard) {
+        setTimeout(() => {
+          securityCard.classList.add('animate__pulse');
+        }, 1000);
       }
     });
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,41 +1,121 @@
 <!doctype html>
-<html>
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Auth Demo</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link rel="stylesheet" href="/public/styles.css">
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+<body class="bg-light">
+  <!-- Navbar Modernizada -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary fixed-top shadow-sm">
     <div class="container">
-      <a class="navbar-brand text-primary fw-bold" href="/public/index.html">Vercel + MongoDB Auth</a>
-      <div class="collapse navbar-collapse">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="/public/index.html">
+        <i class="fas fa-shield-alt me-2"></i>
+        Vercel + MongoDB Auth
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="/public/signup.html">Cadastro</a></li>
-          <li class="nav-item"><a class="nav-link" href="/public/login.html">Login</a></li>
+          <li class="nav-item">
+            <a class="nav-link btn-hover" href="/public/signup.html">
+              <i class="fas fa-user-plus me-1"></i> Cadastro
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn-hover" href="/public/login.html">
+              <i class="fas fa-sign-in-alt me-1"></i> Login
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <main class="container">
+  <!-- Conteúdo Principal -->
+  <main class="container mt-5 pt-5">
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card shadow-sm">
-          <div class="card-body text-center">
-            <h1 class="card-title mb-2">Demo de Autenticação</h1>
-            <p class="lead text-muted">Exemplo simples de cadastro e login usando Serverless Functions no Vercel e MongoDB.</p>
-            <a class="btn btn-primary me-2" href="/public/signup.html">Criar Conta</a>
-            <a class="btn btn-outline-primary" href="/public/login.html">Login</a>
+      <div class="col-lg-8 col-md-10">
+        <div class="card modern-card animate__animated animate__fadeInUp">
+          <div class="card-body text-center p-5">
+            <div class="icon-circle mb-4">
+              <i class="fas fa-lock fa-2x text-primary"></i>
+            </div>
+            <h1 class="card-title mb-3 fw-bold">Demo de Autenticação Moderna</h1>
+            <p class="lead text-muted mb-4">
+              Sistema completo de cadastro e login usando Serverless Functions no Vercel e MongoDB como banco de dados.
+            </p>
+            <div class="d-grid gap-3 d-md-block">
+              <a class="btn btn-primary btn-lg btn-hover me-md-3 mb-2" href="/public/signup.html">
+                <i class="fas fa-user-plus me-2"></i>Criar Conta
+              </a>
+              <a class="btn btn-outline-primary btn-lg btn-hover mb-2" href="/public/login.html">
+                <i class="fas fa-sign-in-alt me-2"></i>Login
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recursos -->
+        <div class="row mt-5">
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 feature-card animate__animated animate__fadeInLeft">
+              <div class="card-body text-center p-4">
+                <i class="fas fa-bolt fa-2x text-primary mb-3"></i>
+                <h5 class="fw-bold">Serverless</h5>
+                <p class="text-muted">Funções serverless no Vercel para escalabilidade automática.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 feature-card animate__animated animate__fadeInUp">
+              <div class="card-body text-center p-4">
+                <i class="fas fa-database fa-2x text-primary mb-3"></i>
+                <h5 class="fw-bold">MongoDB</h5>
+                <p class="text-muted">Banco de dados NoSQL para armazenamento seguro de usuários.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 feature-card animate__animated animate__fadeInRight">
+              <div class="card-body text-center p-4">
+                <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
+                <h5 class="fw-bold">Segurança</h5>
+                <p class="text-muted">Autenticação segura com hash de senhas e tokens JWT.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </main>
-  <div class="footer">Projeto de exemplo • Faça deploy configurando variáveis de ambiente</div>
+
+  <!-- Footer -->
+  <footer class="footer mt-5 py-4 bg-white border-top">
+    <div class="container text-center">
+      <p class="text-muted mb-2">
+        <i class="fas fa-code me-1"></i> Projeto de demonstração • Configure as variáveis de ambiente no deploy
+      </p>
+      <p class="text-muted small">
+        <i class="fas fa-heart text-danger me-1"></i> Desenvolvido com Bootstrap 5 & Font Awesome
+      </p>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Adicionar efeito de digitação ao título
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.feature-card');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.2}s`;
+      });
+    });
+  </script>
 </body>
 </html>
