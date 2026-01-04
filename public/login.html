@@ -4,36 +4,50 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/public/styles.css">
 </head>
 <body>
-  <header class="header">
-    <div class="brand">Vercel + MongoDB Auth</div>
-    <nav>
-      <a href="/public/signup.html">Cadastro</a>
-    </nav>
-  </header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+    <div class="container">
+      <a class="navbar-brand text-primary fw-bold" href="/public/index.html">Vercel + MongoDB Auth</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/public/signup.html">Cadastro</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <main class="container">
-    <section class="card">
-      <h1>Login</h1>
-      <p class="lead">Entre com seu email e senha.</p>
-      <form id="login">
-        <div class="form-group"><input type="email" id="email" placeholder="Email" required /></div>
-        <div class="form-group"><input type="password" id="password" placeholder="Senha" required /></div>
-        <button class="btn" type="submit">Entrar</button>
-      </form>
-      <p id="message" class="message"></p>
-      <p><a href="/public/signup.html">Criar conta</a></p>
-    </section>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <section class="card">
+          <div class="card-body">
+            <h1 class="card-title">Login</h1>
+            <p class="lead text-muted">Entre com seu email e senha.</p>
+            <form id="login">
+              <div class="mb-3"><input class="form-control" type="email" id="email" placeholder="Email" required /></div>
+              <div class="mb-3"><input class="form-control" type="password" id="password" placeholder="Senha" required /></div>
+              <div class="d-flex align-items-center">
+                <button class="btn btn-primary" type="submit">Entrar</button>
+                <a class="btn btn-link ms-3" href="/public/signup.html">Criar conta</a>
+              </div>
+            </form>
+            <div id="message" class="message mt-3" role="status"></div>
+          </div>
+        </section>
+      </div>
+    </div>
   </main>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     document.getElementById('login').addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
+      const msg = document.getElementById('message');
 
       try {
         const r = await fetch('/api/login', {
@@ -45,16 +59,14 @@
         const data = await r.json();
         if (!r.ok) throw data;
 
-        document.getElementById('message').innerText =
-          'Login com sucesso! Redirecionando...';
+        msg.innerHTML = '<div class="alert alert-success">Login com sucesso! Redirecionando...</div>';
 
         setTimeout(() => {
           window.location.href = '/public/welcome.html';
         }, 600);
 
       } catch (err) {
-        document.getElementById('message').innerText =
-          err.error || 'Erro no login';
+        msg.innerHTML = '<div class="alert alert-danger">' + (err.error || 'Erro no login') + '</div>';
       }
     });
   </script>

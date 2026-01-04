@@ -4,24 +4,38 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Auth Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/public/styles.css">
 </head>
 <body>
-  <header class="header">
-    <div class="brand">Vercel + MongoDB Auth</div>
-    <nav>
-      <a href="/public/signup.html">Cadastro</a>
-      <a href="/public/login.html">Login</a>
-    </nav>
-  </header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+    <div class="container">
+      <a class="navbar-brand text-primary fw-bold" href="/public/index.html">Vercel + MongoDB Auth</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/public/signup.html">Cadastro</a></li>
+          <li class="nav-item"><a class="nav-link" href="/public/login.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <main class="container">
-    <section class="card">
-      <h1>Demo de Autenticação</h1>
-      <p class="lead">Exemplo simples de cadastro e login usando Serverless Functions no Vercel e MongoDB.</p>
-      <p><a class="btn" href="/public/signup.html">Criar Conta</a> <a class="btn ghost" href="/public/login.html">Login</a></p>
-    </section>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <h1 class="card-title mb-2">Demo de Autenticação</h1>
+            <p class="lead text-muted">Exemplo simples de cadastro e login usando Serverless Functions no Vercel e MongoDB.</p>
+            <a class="btn btn-primary me-2" href="/public/signup.html">Criar Conta</a>
+            <a class="btn btn-outline-primary" href="/public/login.html">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
   <div class="footer">Projeto de exemplo • Faça deploy configurando variáveis de ambiente</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
