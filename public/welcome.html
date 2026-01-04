@@ -8,92 +8,416 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link rel="stylesheet" href="/public/styles.css">
+  <style>
+    /* Estilos específicos para welcome.html */
+    .welcome-hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .user-avatar-large {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 3rem;
+      color: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .info-card {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-left: 5px solid #667eea;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .welcome-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .stat-item {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    .stat-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .stat-icon {
+      font-size: 2rem;
+      color: #667eea;
+      margin-bottom: 1rem;
+    }
+    
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .quick-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .welcome-hero {
+        padding: 2rem 1rem;
+      }
+      
+      .user-avatar-large {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+      }
+      
+      .quick-actions {
+        flex-direction: column;
+      }
+      
+      .quick-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body class="bg-light">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary shadow-sm">
+  <!-- Navbar Moderna -->
+  <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
     <div class="container">
       <a class="navbar-brand fw-bold d-flex align-items-center" href="/public/index.html">
         <i class="fas fa-shield-alt me-2"></i>
-        Vercel + MongoDB Auth
+        Auth System
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link btn-hover" href="/public/index.html">
-              <i class="fas fa-home me-1"></i> Home
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link btn-hover" href="/public/login.html">
-              <i class="fas fa-sign-in-alt me-1"></i> Login
-            </a>
-          </li>
-        </ul>
+      <div class="d-flex align-items-center">
+        <span class="text-white me-3 d-none d-md-block">
+          <i class="fas fa-user-circle me-1"></i>
+          <span id="navUserName">Usuário</span>
+        </span>
+        <button id="logout" class="btn btn-light btn-sm">
+          <i class="fas fa-sign-out-alt me-1"></i>Sair
+        </button>
       </div>
     </div>
   </nav>
 
-  <main class="container welcome-container">
+  <!-- Conteúdo Principal -->
+  <main class="container py-5">
     <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6">
-        <div class="card modern-card welcome-card animate__animated animate__zoomIn">
-          <div class="card-body p-5 text-center">
-            <div class="user-avatar mb-4">
-              <i class="fas fa-user-circle"></i>
-            </div>
-            
-            <h1 id="greet" class="h2 fw-bold mb-3">Bem-vindo!</h1>
-            <p id="info" class="text-muted mb-4">Carregando suas informações...</p>
-            
-            <div class="user-details card bg-light border-0 p-4 mb-4">
-              <h5 class="fw-bold mb-3"><i class="fas fa-user-tag me-2 text-primary"></i>Suas Informações</h5>
-              <div class="row text-start">
-                <div class="col-md-6 mb-3">
-                  <p class="mb-1 text-muted small">Nome</p>
-                  <p id="userName" class="fw-semibold">-</p>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <p class="mb-1 text-muted small">Email</p>
-                  <p id="userEmail" class="fw-semibold">-</p>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <p class="mb-1 text-muted small">Status</p>
-                  <p><span class="badge bg-success">Autenticado</span></p>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <p class="mb-1 text-muted small">Sessão</p>
-                  <p><span class="badge bg-primary">Ativa</span></p>
-                </div>
+      <div class="col-lg-10">
+        <!-- Cabeçalho de Boas-vindas -->
+        <div class="welcome-hero animate__animated animate__fadeIn">
+          <div class="user-avatar-large">
+            <i class="fas fa-user-check"></i>
+          </div>
+          <h1 id="greet" class="display-5 fw-bold text-center mb-3">Bem-vindo de volta!</h1>
+          <p class="text-center mb-4" style="opacity: 0.9;">Sua sessão está ativa e segura</p>
+        </div>
+
+        <!-- Informações do Usuário -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <div class="info-card animate__animated animate__fadeInLeft">
+              <h5 class="fw-bold mb-3"><i class="fas fa-user-circle me-2 text-primary"></i>Informações da Conta</h5>
+              <div class="mb-3">
+                <p class="text-muted mb-1">Nome Completo</p>
+                <p id="userName" class="fw-bold h5">-</p>
+              </div>
+              <div class="mb-3">
+                <p class="text-muted mb-1">Email</p>
+                <p id="userEmail" class="fw-bold">-</p>
+              </div>
+              <div>
+                <p class="text-muted mb-1">Status da Conta</p>
+                <span class="badge bg-success rounded-pill px-3 py-2">
+                  <i class="fas fa-check-circle me-1"></i>Ativa
+                </span>
               </div>
             </div>
-            
-            <div class="d-grid gap-3 d-md-block">
-              <button id="logout" class="btn btn-danger btn-lg btn-hover">
-                <i class="fas fa-sign-out-alt me-2"></i>Logout
-              </button>
-              <a href="/public/index.html" class="btn btn-outline-primary btn-lg btn-hover ms-md-2 mt-2 mt-md-0">
-                <i class="fas fa-home me-2"></i>Voltar ao Início
-              </a>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="info-card animate__animated animate__fadeInRight">
+              <h5 class="fw-bold mb-3"><i class="fas fa-shield-alt me-2 text-primary"></i>Segurança</h5>
+              <div class="mb-3">
+                <p class="text-muted mb-1">Último Login</p>
+                <p class="fw-bold" id="lastLogin">Há alguns instantes</p>
+              </div>
+              <div class="mb-3">
+                <p class="text-muted mb-1">Sessão Ativa</p>
+                <div class="progress" style="height: 10px;">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                </div>
+              </div>
+              <div>
+                <p class="text-muted mb-1">Recomendação</p>
+                <p class="small">Mantenha sua senha segura e não compartilhe suas credenciais.</p>
+              </div>
             </div>
           </div>
         </div>
-        
-        <div class="row mt-4">
-          <div class="col-md-6 mb-3">
-            <div class="card h-100 feature-card">
-              <div class="card-body text-center p-4">
-                <i class="fas fa-cog fa-2x text-primary mb-3"></i>
-                <h6 class="fw-bold">Gerenciar Conta</h6>
-                <p class="text-muted small">Atualize suas informações e preferências</p>
-              </div>
+
+        <!-- Estatísticas -->
+        <div class="welcome-stats">
+          <div class="stat-item animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+            <div class="stat-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="stat-value" id="daysActive">1</div>
+            <div class="stat-label">Dias Ativo</div>
+          </div>
+          
+          <div class="stat-item animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+            <div class="stat-icon">
+              <i class="fas fa-key"></i>
+            </div>
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Segurança</div>
+          </div>
+          
+          <div class="stat-item animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+            <div class="stat-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <div class="stat-value">24/7</div>
+            <div class="stat-label">Disponibilidade</div>
+          </div>
+          
+          <div class="stat-item animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+            <div class="stat-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <div class="stat-value">MongoDB</div>
+            <div class="stat-label">Backend</div>
+          </div>
+        </div>
+
+        <!-- Ações Rápidas -->
+        <div class="card modern-card animate__animated animate__fadeIn" style="animation-delay: 0.5s">
+          <div class="card-body">
+            <h5 class="fw-bold mb-4 text-center">
+              <i class="fas fa-rocket me-2 text-primary"></i>Ações Rápidas
+            </h5>
+            <div class="quick-actions">
+              <a href="/public/index.html" class="btn btn-primary btn-hover">
+                <i class="fas fa-home me-2"></i>Página Inicial
+              </a>
+              <button class="btn btn-outline-primary btn-hover" id="refreshBtn">
+                <i class="fas fa-sync-alt me-2"></i>Atualizar Dados
+              </button>
+              <button class="btn btn-outline-success btn-hover" id="copyEmailBtn">
+                <i class="fas fa-copy me-2"></i>Copiar Email
+              </button>
+              <button class="btn btn-outline-danger btn-hover" id="logoutBtn">
+                <i class="fas fa-sign-out-alt me-2"></i>Sair do Sistema
+              </button>
             </div>
           </div>
-          <div class="col-md-6 mb-3">
-            <div class="card h-100 feature-card">
-              <div class="card-body text-center p-4">
-                <i class="fas fa-history fa-2x text-primary mb-3"></i>
-                <h6 class="fw-bold">Histórico</h6>
-                <p class="text-muted small">Ve
+        </div>
+
+        <!-- Mensagem de Boas-vindas -->
+        <div class="text-center mt-5">
+          <p class="text-muted">
+            <i class="fas fa-info-circle me-1"></i>
+            Esta é uma demonstração de sistema de autenticação usando Vercel Serverless Functions e MongoDB.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-5 py-3 bg-white border-top">
+    <div class="container text-center">
+      <p class="text-muted mb-0">
+        <i class="fas fa-code me-1"></i> Sistema de Autenticação Demo • 
+        <span id="sessionTimer" class="fw-semibold">Sessão ativa</span>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Elementos DOM
+    const greetElement = document.getElementById('greet');
+    const userNameElement = document.getElementById('userName');
+    const userEmailElement = document.getElementById('userEmail');
+    const navUserNameElement = document.getElementById('navUserName');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const logoutNavBtn = document.getElementById('logout');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+    const sessionTimer = document.getElementById('sessionTimer');
+    const daysActiveElement = document.getElementById('daysActive');
+    const lastLoginElement = document.getElementById('lastLogin');
+
+    // Variáveis
+    let sessionStartTime = new Date();
+    let userData = null;
+
+    // Formatar data
+    function formatDateTime(date) {
+      return date.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    // Atualizar timer da sessão
+    function updateSessionTimer() {
+      const now = new Date();
+      const diff = Math.floor((now - sessionStartTime) / 1000);
+      const minutes = Math.floor(diff / 60);
+      const seconds = diff % 60;
+      
+      sessionTimer.textContent = `Sessão: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // Carregar dados do usuário
+    async function loadUserData() {
+      try {
+        const response = await fetch('/api/me');
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error('Não autenticado');
+        }
+
+        userData = data.user;
+        
+        // Atualizar UI com dados do usuário
+        const displayName = userData.name || userData.email.split('@')[0];
+        
+        greetElement.textContent = `Olá, ${displayName}!`;
+        userNameElement.textContent = userData.name || 'Não informado';
+        userEmailElement.textContent = userData.email;
+        navUserNameElement.textContent = displayName;
+        
+        // Animar elementos
+        greetElement.classList.add('animate__pulse');
+        setTimeout(() => {
+          greetElement.classList.remove('animate__pulse');
+        }, 1000);
+
+      } catch (error) {
+        console.error('Erro ao carregar dados:', error);
+        window.location.href = '/public/login.html';
+      }
+    }
+
+    // Copiar email para clipboard
+    copyEmailBtn.addEventListener('click', () => {
+      if (!userData) return;
+      
+      navigator.clipboard.writeText(userData.email).then(() => {
+        // Feedback visual
+        const originalText = copyEmailBtn.innerHTML;
+        copyEmailBtn.innerHTML = '<i class="fas fa-check me-2"></i>Copiado!';
+        copyEmailBtn.classList.remove('btn-outline-primary');
+        copyEmailBtn.classList.add('btn-success');
+        
+        setTimeout(() => {
+          copyEmailBtn.innerHTML = originalText;
+          copyEmailBtn.classList.remove('btn-success');
+          copyEmailBtn.classList.add('btn-outline-primary');
+        }, 2000);
+      });
+    });
+
+    // Botão de atualizar
+    refreshBtn.addEventListener('click', () => {
+      refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Atualizando...';
+      refreshBtn.disabled = true;
+      
+      setTimeout(() => {
+        loadUserData();
+        refreshBtn.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Atualizar Dados';
+        refreshBtn.disabled = false;
+        refreshBtn.classList.add('animate__rotateIn');
+        
+        setTimeout(() => {
+          refreshBtn.classList.remove('animate__rotateIn');
+        }, 1000);
+      }, 800);
+    });
+
+    // Logout
+    async function logout() {
+      try {
+        await fetch('/api/logout', { method: 'POST' });
+        
+        // Feedback visual antes de redirecionar
+        document.body.classList.add('animate__fadeOut');
+        
+        setTimeout(() => {
+          window.location.href = '/public/login.html';
+        }, 500);
+      } catch (error) {
+        console.error('Erro ao fazer logout:', error);
+        window.location.href = '/public/login.html';
+      }
+    }
+
+    // Event listeners para logout
+    logoutBtn.addEventListener('click', logout);
+    logoutNavBtn.addEventListener('click', logout);
+
+    // Inicializar página
+    document.addEventListener('DOMContentLoaded', () => {
+      loadUserData();
+      
+      // Iniciar timer da sessão
+      setInterval(updateSessionTimer, 1000);
+      
+      // Configurar tempo ativo (simulação)
+      const randomDays = Math.floor(Math.random() * 30) + 1;
+      daysActiveElement.textContent = randomDays;
+      
+      // Configurar último login
+      lastLoginElement.textContent = formatDateTime(new Date());
+      
+      // Animar entrada dos cards
+      const cards = document.querySelectorAll('.animate__animated');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+      });
+    });
+
+    // Proteger contra navegação para trás
+    window.history.pushState(null, null, window.location.href);
+    window.onpopstate = function () {
+      window.history.go(1);
+    };
+  </script>
+</body>
+</html>
