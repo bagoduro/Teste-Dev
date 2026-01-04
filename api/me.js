@@ -36,7 +36,19 @@ module.exports = async (req, res) => {
     const user = await User.findById(payload.sub).select('-passwordHash');
     if (!user) return res.status(404).json({ error: 'User not found' });
 
-    return res.status(200).json({ user: { id: user._id, email: user.email, name: user.name } });
+    // Calcular dias ativo (desde a criação da conta)
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const daysActive = Math.floor((Date.now() - user.createdAt) / msPerDay) + 1;
+
+    return res.status(200).json({
+      user: {
+        id: user._id,
+        email: user.email,
+        name: user.name,
+        lastLogin: user.lastLogin || null,
+        daysActive
+      }
+    });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Internal Server Error' });

@@ -323,6 +323,10 @@
         userEmailElement.textContent = userData.email;
         navUserNameElement.textContent = displayName;
         
+        // Preencher dias ativo e último login com dados do servidor, se disponíveis
+        daysActiveElement.textContent = userData.daysActive || '-';
+        lastLoginElement.textContent = userData.lastLogin ? formatDateTime(new Date(userData.lastLogin)) : 'Não disponível';
+        
         // Animar elementos
         greetElement.classList.add('animate__pulse');
         setTimeout(() => {
@@ -399,12 +403,12 @@
       // Iniciar timer da sessão
       setInterval(updateSessionTimer, 1000);
       
-      // Configurar tempo ativo (simulação)
-      const randomDays = Math.floor(Math.random() * 30) + 1;
-      daysActiveElement.textContent = randomDays;
+      // Dados dependentes do servidor: não gerar valores fictícios aqui.
+      // Exibir padrão até que os dados do servidor carreguem.
+      daysActiveElement.textContent = '-';
       
-      // Configurar último login
-      lastLoginElement.textContent = formatDateTime(new Date());
+      // Último login será preenchido com dados reais do servidor dentro de loadUserData(), se disponível.
+      lastLoginElement.textContent = 'Não disponível';
       
       // Animar entrada dos cards
       const cards = document.querySelectorAll('.animate__animated');

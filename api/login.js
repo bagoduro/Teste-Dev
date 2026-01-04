@@ -38,6 +38,10 @@ module.exports = async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
+    // Registrar o lastLogin no usuário
+    user.lastLogin = new Date();
+    await user.save();
+
     const payload = { sub: user._id, email: user.email };
     const token = jwt.sign(payload, JWT_SECRET || 'default_dev_secret', { expiresIn: '7d' });
 
